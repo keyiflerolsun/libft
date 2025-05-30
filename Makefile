@@ -1,7 +1,3 @@
-CDIR   = ./srcs
-ODIR   = ./objs
-HDIR   = ./includes
-
 CFILES = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
@@ -27,12 +23,11 @@ CFILES = ft_isalpha.c \
 	ft_strdup.c \
 	ft_substr.c
 
-CFILES := $(addprefix $(CDIR)/, $(CFILES))
-OFILES = $(addprefix $(ODIR)/, $(notdir $(CFILES:.c=.o)))
+OFILES = $(CFILES:.c=.o)
 
 NAME   = libft.a
 CC     = cc
-CFLAGS = -Wall -Wextra -Werror -I $(HDIR)
+CFLAGS = -Wall -Wextra -Werror
 
 GREEN   = \033[0;32m
 YELLOW  = \033[0;33m
@@ -48,8 +43,7 @@ $(NAME): $(OFILES)
 	@echo -e "$(GREEN)» 📦 Creating\t$(RESET): $(MAGENTA)$(NAME)$(RESET)"
 	@ar -rcs $(NAME) $(OFILES)
 
-$(ODIR)/%.o: $(CDIR)/%.c
-	@mkdir -p $(ODIR)
+%.o: %.c
 	@echo -e "$(BLUE)» ⚙️  Compiling\t$(RESET): $(YELLOW)$<\t$(RESET)» $(GREEN)$@$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
