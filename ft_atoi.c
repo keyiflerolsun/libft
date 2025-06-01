@@ -22,11 +22,8 @@ int	ft_atoi(const char *nptr)
 	while (*nptr && ((*nptr >= 9 && *nptr <= 13) || *nptr == ' '))
 		nptr++;
 	if (*nptr == '-' || *nptr == '+')
-	{
-		if (*nptr == '-')
+		if (*nptr++ == '-')
 			sign = sign * -1;
-		nptr++;
-	}
 	while (*nptr && ft_isdigit(*nptr))
 		toi = toi * 10 + (*nptr++ - '0');
 	return (toi * sign);

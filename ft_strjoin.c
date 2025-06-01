@@ -1,25 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osancak <osancak@student.42istanbul.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 13:03:32 by osancak           #+#    #+#             */
-/*   Updated: 2025/05/30 20:08:22 by osancak          ###   ########.fr       */
+/*   Created: 2025/05/31 20:02:33 by osancak           #+#    #+#             */
+/*   Updated: 2025/05/31 20:11:28 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	counter;
+	char	*res;
+	int		i;
 
-	counter = -1;
-	while (++counter < size - 1 && src[counter] && size)
-		dst[counter] = src[counter];
-	if (counter < size)
-		dst[counter] = '\0';
-	return (ft_strlen(src));
+	if (!*s1 && !*s2)
+		return (ft_calloc(1, sizeof(char)));
+	res = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (*s1)
+		res[i++] = *s1++;
+	while (*s2)
+		res[i++] = *s2++;
+	res[i] = '\0';
+	return (res);
 }

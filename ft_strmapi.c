@@ -1,25 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: osancak <osancak@student.42istanbul.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/17 13:03:32 by osancak           #+#    #+#             */
-/*   Updated: 2025/05/30 20:08:22 by osancak          ###   ########.fr       */
+/*   Created: 2025/06/01 18:25:36 by osancak           #+#    #+#             */
+/*   Updated: 2025/06/01 18:33:04 by osancak          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	counter;
+	char	*res;
+	int		i;
 
-	counter = -1;
-	while (++counter < size - 1 && src[counter] && size)
-		dst[counter] = src[counter];
-	if (counter < size)
-		dst[counter] = '\0';
-	return (ft_strlen(src));
+	res = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!res)
+		return (NULL);
+	i = -1;
+	while (s[++i])
+		res[i] = f(i, s[i]);
+	res[i] = '\0';
+	return (res);
 }
