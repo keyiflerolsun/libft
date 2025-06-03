@@ -1,4 +1,4 @@
-CFILES = ft_isalpha.c \
+CFILES      = ft_isalpha.c \
 	ft_isdigit.c \
 	ft_isalnum.c \
 	ft_isascii.c \
@@ -31,9 +31,21 @@ CFILES = ft_isalpha.c \
 	ft_putchar_fd.c \
 	ft_putstr_fd.c \
 	ft_putendl_fd.c \
-	ft_putnbr_fd.c
+	ft_putnbr_fd.c 
 
-OFILES = $(CFILES:.c=.o)
+BONUS_FILES = ft_lstnew.c \
+	ft_lstadd_front.c \
+	ft_lstsize.c \
+	ft_lstlast.c \
+	ft_lstadd_back.c \
+	ft_lstdelone.c \
+	ft_lstclear.c \
+	ft_lstiter.c \
+	ft_lstmap.c
+
+OBJDIR  = obj
+OFILES  = $(addprefix $(OBJDIR)/, $(CFILES:.c=.o))
+BONUS_O = $(addprefix $(OBJDIR)/, $(BONUS_FILES:.c=.o))
 
 NAME   = libft.a
 CC     = cc
@@ -50,21 +62,26 @@ RESET   = \033[0m
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	@echo -e "$(GREEN)» 📦 Creating\t$(RESET): $(MAGENTA)$(NAME)$(RESET)"
+	@printf "$(GREEN)» 📦 Creating\t$(RESET): $(MAGENTA)$(NAME)$(RESET)\n"
 	@ar -rcs $(NAME) $(OFILES)
 
-%.o: %.c
-	@echo -e "$(BLUE)» ⚙️  Compiling\t$(RESET): $(YELLOW)$<\t$(RESET)» $(GREEN)$@$(RESET)"
+$(OBJDIR)/%.o: %.c
+	@mkdir -p $(OBJDIR)
+	@printf "$(BLUE)» ⚙️  Compiling\t$(RESET): $(YELLOW)$<\t$(RESET)» $(GREEN)$@$(RESET)\n"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
+bonus: $(OFILES) $(BONUS_O)
+	@printf "$(MAGENTA)» 🎁 Bonus\t$(RESET): $(GREEN)$(NAME)$(RESET)\n"
+	@ar -rcs $(NAME) $(OFILES) $(BONUS_O)
+
 clean:
-	@echo -e "$(RED)» 🧹 Cleaning\t$(RESET): $(CYAN)*.o $(RESET)"
-	@rm -rf $(OFILES)
+	@printf "$(RED)» 🧹 Cleaning\t$(RESET): $(CYAN)./$(OBJDIR) $(RESET)\n"
+	@rm -rf $(OBJDIR)
 
 fclean: clean
-	@echo -e "$(RED)» 🔥 Removing\t$(RESET): $(MAGENTA)$(NAME)$(RESET)"
+	@printf "$(RED)» 🔥 Removing\t$(RESET): $(MAGENTA)$(NAME)$(RESET)\n"
 	@rm -rf $(NAME)
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
