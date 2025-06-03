@@ -29,27 +29,52 @@ static int	ft_count(char const *s, char c)
 	return (res + 1);
 }
 
+static void	ft_free(char **res, int n)
+{
+	while (n-- > 0)
+		free(res[n]);
+	free(res);
+}
+
+static int	ft_do_split(char const *str, char chr, char **res)
+{
+	int	count;
+	int	len;
+
+	count = 0;
+	while (*str)
+	{
+		while (*str == chr)
+			str++;
+		if (!*str)
+			break ;
+		len = 0;
+		while (str[len] && str[len] != chr)
+			len++;
+		res[count] = ft_substr(str, 0, len);
+		if (!res[count])
+		{
+			ft_free(res, count);
+			return (-1);
+		}
+		count++;
+		str += len;
+	}
+	return (count);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	char	**res;
-	int		i;
-	int		j;
+	int		word_count;
 
-	res = ft_calloc(ft_count(s, c), sizeof(char *));
+	if (!s)
+		return (NULL);
+	word_count = ft_count(s, c);
+	res = ft_calloc(word_count, sizeof(char *));
 	if (!res)
 		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		j = 0;
-		while (*s == c)
-			s++;
-		while (s[j] && s[j] != c)
-			j++;
-		if (*s)
-			res[i] = ft_substr(s, 0, j);
-		i++;
-		s += j;
-	}
+	if (ft_do_split(s, c, res) < 0)
+		return (NULL);
 	return (res);
 }
