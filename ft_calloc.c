@@ -14,13 +14,13 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*result;
+	void	*res;
 
 	if (!nmemb || !size)
 		return (malloc(0));
-	result = malloc(nmemb * size);
-	if (!result)
+	res = malloc(nmemb * size);
+	if (!res)
 		return (NULL);
-	ft_bzero(result, nmemb * size);
-	return (result);
+	ft_bzero(res, nmemb * size);
+	return (res);
 }

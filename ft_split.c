@@ -31,7 +31,7 @@ static int	ft_count(char const *s, char c)
 
 static void	ft_free(char **res, int n)
 {
-	while (n-- > 0)
+	while (n--)
 		free(res[n]);
 	free(res);
 }

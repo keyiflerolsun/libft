@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static char	*ft_getstr(int n)
+static char	*ft_getstr(int num)
 {
 	char	*res;
 	int		len;
@@ -20,16 +20,16 @@ static char	*ft_getstr(int n)
 
 	ito = '\0';
 	len = 0;
-	if (n < 0)
+	if (num < 0)
 	{
 		ito = '-';
 		len = 1;
-		n = n * -1;
+		num *= -1;
 	}
-	while (n > 0)
+	while (num > 0)
 	{
 		len++;
-		n = n / 10;
+		num /= 10;
 	}
 	res = ft_calloc(len + 1, sizeof(char));
 	if (!res)
@@ -54,13 +54,12 @@ char	*ft_itoa(int n)
 	if (!res)
 		return (NULL);
 	if (n < 0)
-		n = n * -1;
+		n *= -1;
 	len = ft_strlen(res) - 1;
-	while (res[len] != '-' && res[len])
+	while (len >= 0 && res[len] && res[len] != '-')
 	{
-		res[len] = (n % 10) + '0';
-		n = n / 10;
-		len--;
+		res[len--] = (n % 10) + '0';
+		n /= 10;
 	}
 	return (res);
 }

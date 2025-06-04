@@ -15,16 +15,16 @@
 int	ft_atoi(const char *nptr)
 {
 	int	toi;
-	int	sign;
+	int	sig;
 
-	sign = 1;
+	sig = 1;
 	toi = 0;
-	while (*nptr && ((*nptr >= 9 && *nptr <= 13) || *nptr == ' '))
+	while (*nptr && ((*nptr >= '\t' && *nptr <= '\r') || *nptr == ' '))
 		nptr++;
 	if (*nptr == '-' || *nptr == '+')
 		if (*nptr++ == '-')
-			sign = sign * -1;
+			sig *= -1;
 	while (*nptr && ft_isdigit(*nptr))
 		toi = toi * 10 + (*nptr++ - '0');
-	return (toi * sign);
+	return (toi * sig);
 }

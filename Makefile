@@ -62,24 +62,24 @@ RESET   = \033[0m
 all: $(NAME)
 
 $(NAME): $(OFILES)
-	@printf "$(GREEN)» 📦 Creating\t$(RESET): $(MAGENTA)$(NAME)$(RESET)\n"
+	@printf "$(GREEN)» 📦 Creating  $(RESET)» $(MAGENTA)$(NAME)$(RESET)\n"
 	@ar -rcs $(NAME) $(OFILES)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)
-	@printf "$(BLUE)» ⚙️  Compiling\t$(RESET): $(YELLOW)$<\t$(RESET)» $(GREEN)$@$(RESET)\n"
+	@printf "$(BLUE)» ⚙️  Compiling $(RESET)» $(YELLOW)%18s$(RESET) | $(GREEN)%s$(RESET)\n" "$<" "$@"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(OFILES) $(BONUS_O)
-	@printf "$(MAGENTA)» 🎁 Bonus\t$(RESET): $(GREEN)$(NAME)$(RESET)\n"
+	@printf "$(MAGENTA)» 🎁 Bonus     $(RESET)» $(GREEN)$(NAME)$(RESET)\n"
 	@ar -rcs $(NAME) $(OFILES) $(BONUS_O)
 
 clean:
-	@printf "$(RED)» 🧹 Cleaning\t$(RESET): $(CYAN)./$(OBJDIR) $(RESET)\n"
+	@printf "$(RED)» 🧹 Cleaning  $(RESET)» $(CYAN)./$(OBJDIR) $(RESET)\n"
 	@rm -rf $(OBJDIR)
 
 fclean: clean
-	@printf "$(RED)» 🔥 Removing\t$(RESET): $(MAGENTA)$(NAME)$(RESET)\n"
+	@printf "$(RED)» 🔥 Removing  $(RESET)» $(MAGENTA)$(NAME)$(RESET)\n"
 	@rm -rf $(NAME)
 
 re: fclean all
