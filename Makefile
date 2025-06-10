@@ -33,15 +33,15 @@ CFILES      = ft_isalpha.c \
 	ft_putendl_fd.c \
 	ft_putnbr_fd.c 
 
-BONUS_FILES = ft_lstnew.c \
-	ft_lstadd_front.c \
-	ft_lstsize.c \
-	ft_lstlast.c \
-	ft_lstadd_back.c \
-	ft_lstdelone.c \
-	ft_lstclear.c \
-	ft_lstiter.c \
-	ft_lstmap.c
+BONUS_FILES = ft_lstnew_bonus.c \
+	ft_lstadd_front_bonus.c \
+	ft_lstsize_bonus.c \
+	ft_lstlast_bonus.c \
+	ft_lstadd_back_bonus.c \
+	ft_lstdelone_bonus.c \
+	ft_lstclear_bonus.c \
+	ft_lstiter_bonus.c \
+	ft_lstmap_bonus.c
 
 OBJDIR  = obj
 OFILES  = $(addprefix $(OBJDIR)/, $(CFILES:.c=.o))
@@ -67,7 +67,7 @@ $(NAME): $(OFILES)
 
 $(OBJDIR)/%.o: %.c
 	@mkdir -p $(OBJDIR)
-	@printf "$(BLUE)» ⚙️  Compiling $(RESET)» $(YELLOW)%18s$(RESET) | $(GREEN)%s$(RESET)\n" "$<" "$@"
+	@printf "$(BLUE)» ⚙️  Compiling $(RESET)» $(YELLOW)%24s$(RESET) | $(GREEN)%s$(RESET)\n" "$<" "$@"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 bonus: $(OFILES) $(BONUS_O)

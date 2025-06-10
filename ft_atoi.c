@@ -14,8 +14,8 @@
 
 int	ft_atoi(const char *nptr)
 {
-	int	toi;
-	int	sig;
+	long int	toi;
+	int			sig;
 
 	sig = 1;
 	toi = 0;
@@ -26,5 +26,9 @@ int	ft_atoi(const char *nptr)
 			sig *= -1;
 	while (*nptr && ft_isdigit(*nptr))
 		toi = toi * 10 + (*nptr++ - '0');
+	if (toi * sig > 2147483647)
+		return (-1);
+	if (toi * sig < -2147483648)
+		return (0);
 	return (toi * sig);
 }
