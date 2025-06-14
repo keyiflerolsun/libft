@@ -1,4 +1,4 @@
-# Libft
+# libft
 
 Bu proje, C programlama dilinde temel kütüphane fonksiyonlarının kendi başınıza yeniden yazılmasını amaçlar. `libft`, 42 öğrencileri için sıklıkla kullanılan ve çeşitli projelerde temel olarak ihtiyaç duyulan fonksiyonları içerir.
 
